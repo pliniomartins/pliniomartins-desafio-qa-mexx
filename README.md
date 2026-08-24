@@ -317,17 +317,30 @@ Resumindo: a ideia central é não aceitar “aparentemente foi criado” como r
 
 ## 5. Automação
 
-Um dos cenários (TC06 — checkout completo com dados válidos) foi automatizado com **Playwright**. O script está em `automacao/checkout.spec.js`.
+Automatizei o fluxo de **login + adicionar produto ao carrinho** (TC01 + TC05) usando **Playwright com Python (pytest-playwright)**. O script está em `automacao/test_login_carrinho.py` e faz o seguinte:
+1. Abre o SauceDemo
+2. Faz login com `standard_user` / `secret_sauce`
+3. Confirma que foi redirecionado para a página de produtos
+4. Clica em "Add to cart" no primeiro produto
+5. Confirma que o ícone do carrinho passa a exibir "1"
+
+**Resultado real da execução** (rodado localmente):
+```
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+collected 1 item
+test_login_carrinho.py .                                                               [100%]
+======================================= 1 passed in 6.14s =======================================
+```
 
 Como rodar:
 ```bash
 cd automacao
-npm install
-npx playwright install chromium   # se ainda não tiver o navegador instalado
-npx playwright test
+pip install pytest-playwright
+python -m playwright install chromium
+python -m pytest test_login_carrinho.py
 ```
 
-**Importante:** o ambiente onde este material foi preparado não tinha acesso de rede ao saucedemo.com, então o script não pôde ser executado e confirmado por aqui — rode localmente antes de entregar para garantir que passa.
+Também deixei disponíveis, como material extra (não obrigatório): `login.spec.js` (só login, em JavaScript), `login_carrinho.spec.js` (mesmo fluxo do teste em Python, mas em JavaScript) e `checkout.spec.js` (fluxo completo até a finalização do pedido, em JavaScript — mais avançado, ainda não confirmado rodando).
 
 ---
 
@@ -341,6 +354,6 @@ O cenário mais interessante para mim foi o do `visual_user`. O nome do usuário
 
 - [x] Evidências adicionadas para: TC01 (login), TC05/TC06 (carrinho), problema #1 (imagens de cachorro), #3/#4 (remove + last name, GIF), #10 (erro de ordenação do error_user), #13 (preços aleatórios do visual_user).
 - [ ] Ainda faltam prints para os problemas #2, #6 (metade dos produtos não adiciona — problem_user e error_user), #7 (lentidão na ordenação do performance_glitch_user), #9 (remove não funciona na home do error_user), #11 (checkout não valida do error_user) e #12 (layout desalinhado do visual_user). Não são obrigatórios, mas reforçam a entrega — se sobrar tempo, vale capturar.
-- [ ] Rodar a automação localmente (`cd automacao && npm install && npx playwright install chromium && npx playwright test`) para confirmar que o script passa, e ajustar se necessário.
+- [x] Automação rodada localmente e confirmada: `1 passed in 6.14s` (`automacao/test_login_carrinho.py`).
 - [ ] Revisar o texto geral e apagar esta seção de checklist antes do envio final.
 - [x] Parte opcional de API (Restful Booker) feita — ver seção 4.
