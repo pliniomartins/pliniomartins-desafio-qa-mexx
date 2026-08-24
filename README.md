@@ -362,12 +362,3 @@ python -m pytest test_compra_completa.py --headed --slowmo 2000
 
 O cenário mais interessante para mim foi o do `visual_user`. O nome do usuário sugere que o problema seria só visual — os desalinhamentos de layout e a imagem trocada, que são os bugs "esperados" pelo próprio nome. Mas ao testar a fundo, encontrei algo que acho que nem era a intenção original: os preços mudam para valores aleatórios toda vez que você aciona a ordenação, inclusive no mesmo item, que continua na mesma posição da lista. Isso não é um problema só de aparência, é um problema de dados/confiabilidade da informação exibida — algo que dificilmente seria pego só olhando rápido pra tela, e que exigiu eu comparar valores entre cliques pra perceber o padrão. Achei esse o achado que mais mostra a diferença entre "só olhar" e realmente testar.
 
----
-
-## Observações finais (checklist antes de entregar)
-
-- [x] Evidências adicionadas para: TC01 (login), TC05/TC06 (carrinho), problema #1 (imagens de cachorro), #3/#4 (remove + last name, GIF), #10 (erro de ordenação do error_user), #13 (preços aleatórios do visual_user).
-- [ ] Ainda faltam prints para os problemas #2, #6 (metade dos produtos não adiciona — problem_user e error_user), #7 (lentidão na ordenação do performance_glitch_user), #9 (remove não funciona na home do error_user), #11 (checkout não valida do error_user) e #12 (layout desalinhado do visual_user). Não são obrigatórios, mas reforçam a entrega — se sobrar tempo, vale capturar.
-- [x] Automação rodada localmente e confirmada: `1 passed in 6.14s` (`automacao/test_login_carrinho.py`).
-- [ ] Revisar o texto geral e apagar esta seção de checklist antes do envio final.
-- [x] Parte opcional de API (Restful Booker) feita — ver seção 4.

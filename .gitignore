@@ -4,3 +4,10 @@ __pycache__/
 test-results/
 playwright-report/
 .DS_Store
+
+# Ferramentas de geração do documento Word (Opção B) - não fazem parte
+# da entrega em si, só do processo de gerar o .docx
+build_docx.js
+*.docx
+evidencias/frames/
+evidencias/frames2/
