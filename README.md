@@ -20,6 +20,7 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 | Resultado esperado | Usuário é redirecionado para a página de produtos (`inventory.html`) |
 | Resultado obtido | Usuário foi redirecionado corretamente para `https://www.saucedemo.com/inventory.html`, a página de produtos |
 | Status | Passou |
+| Evidência | ![Tela de login do SauceDemo](evidencias/01_tela_login_padrao.gif) |
 
 ### TC02 — Login com senha inválida
 | Campo | Descrição |
@@ -56,6 +57,7 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 | Resultado esperado | O botão muda para "Remove" e o ícone do carrinho passa a exibir o número "1" |
 | Resultado obtido | O botão mudou para "Remove" e o ícone do carrinho passou a exibir o número "1" |
 | Status | Passou |
+| Evidência | ![Botão "Checkout" e ícone do carrinho na tela do carrinho](evidencias/carrinho_vazio_checkout.png) |
 
 ### TC06 — Checkout completo com dados válidos
 | Campo | Descrição |
@@ -170,7 +172,7 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 - Como reproduzir: fazer login com `problem_user` / `secret_sauce` e observar a tela de produtos (inventory).
 - Resultado esperado: cada produto exibe sua própria imagem.
 - Resultado obtido: todos os produtos exibem a mesma imagem (um cachorro segurando uma bola na boca), em vez da foto real de cada item.
-- Evidência: [adicionar print]
+- Evidência: ![Todos os produtos com a mesma imagem de cachorro (problem_user)](evidencias/problem_user_imagens_cachorro.png)
 - Severidade sugerida: alta — compromete diretamente a experiência de compra, o usuário não consegue visualizar o que está comprando.
 
 ### 2. Metade dos produtos não pode ser adicionada ao carrinho (problem_user)
@@ -184,14 +186,14 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 - Como reproduzir: login com `problem_user`, adicionar um produto que funciona (ex: Sauce Labs Backpack), clicar em "Remove" ainda na tela de inventário (sem entrar no carrinho).
 - Resultado esperado: o item é removido do carrinho e o botão volta a "Add to cart".
 - Resultado obtido: o clique em "Remove" na tela de inventário não tem efeito; só é possível remover o item entrando na tela do carrinho.
-- Evidência: [adicionar print]
+- Evidência: ![Remove não funciona na home e Last Name digita no campo errado (problem_user)](evidencias/problem_user_remove_e_lastname.gif)
 - Severidade sugerida: média — existe um caminho alternativo funcional (remover pelo carrinho), mas o botão principal não funciona.
 
 ### 4. Campo "Last Name" insere texto no campo errado (problem_user)
 - Como reproduzir: login com `problem_user`, ir até o checkout, clicar no campo "Last Name" e digitar um sobrenome.
 - Resultado esperado: o texto digitado aparece no campo "Last Name".
 - Resultado obtido: o texto digitado é inserido no campo "First Name" em vez do "Last Name".
-- Evidência: [adicionar print]
+- Evidência: ver o mesmo GIF do problema #3 acima (`evidencias/problem_user_remove_e_lastname.gif`) — mostra os dois bugs em sequência.
 - Severidade sugerida: alta — impede a finalização da compra corretamente para esse usuário, já que o campo obrigatório nunca é preenchido de fato.
 
 ### 5. Ordenação por preço não funciona (problem_user)
@@ -232,9 +234,9 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 ### 10. Ordenação por preço gera erro (error_user)
 - Como reproduzir: login com `error_user`, na tela de produtos selecionar "Price (low to high)" ou "Price (high to low)".
 - Resultado esperado: a lista é reordenada sem problemas.
-- Resultado obtido: a aplicação apresenta um erro ao tentar aplicar a ordenação (diferente do `problem_user`, que simplesmente ignora a ordenação sem erro visível — aqui chega a dar erro).
-- Evidência: [adicionar print/gravação do erro exibido]
-- Severidade sugerida: média/alta — comportamento de erro explícito pode indicar uma falha não tratada na aplicação.
+- Resultado obtido: a aplicação apresenta um alerta de erro do navegador: **"Sorting is broken! This error has been reported to Backtrace."** (diferente do `problem_user`, que simplesmente ignora a ordenação sem erro visível — aqui chega a dar um erro explícito).
+- Evidência: ![Alerta "Sorting is broken" ao tentar ordenar por preço (error_user)](evidencias/error_user_sort_error.png)
+- Severidade sugerida: média/alta — comportamento de erro explícito, reportado até para um serviço de rastreamento ("Backtrace"), indica uma falha não tratada na aplicação.
 
 ### 11. Checkout não valida nem finaliza com Last Name vazio (error_user)
 - Como reproduzir: login com `error_user`, ir ao checkout, deixar o campo "Last Name" vazio, clicar em "Continue"/tentar finalizar a compra.
@@ -254,7 +256,7 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 - Como reproduzir: login com `visual_user`, observar os preços na tela de produtos, depois clicar repetidamente em "Price (low to high)" / "Price (high to low)".
 - Resultado esperado: preços corretos e estáveis, mudando apenas de posição (não de valor) ao ordenar.
 - Resultado obtido: os preços já aparecem incorretos antes de qualquer ordenação, e a cada clique no seletor de ordenação os valores exibidos mudam para números aparentemente aleatórios — inclusive para produtos que não mudam de posição na lista (ex: o item com a foto de cachorro permanece fixo na primeira posição, mas seu preço muda a cada clique).
-- Evidência: [adicionar gravação de tela — esse comportamento fica mais claro em vídeo/GIF do que em print]
+- Evidência: ![Preços aleatórios após ordenar por preço (visual_user) — Backpack aparece a $53.65, Bike Light a $89.51, valores fora do padrão real da loja](evidencias/visual_user_precos_aleatorios.png)
 - Severidade sugerida: alta — exibir preço errado/instável para o cliente é um problema sério em um e-commerce real (risco de cobrança incorreta e perda de confiança).
 
 ### TC13 — Proteção de rota após logout (botão voltar do navegador)
@@ -322,7 +324,8 @@ O cenário mais interessante para mim foi o do `visual_user`. O nome do usuário
 
 ## Observações finais (checklist antes de entregar)
 
-- [ ] Adicionar prints/GIFs nos problemas listados na seção 2 (marcados como `[adicionar print]`) — pelo menos os mais visuais: imagem do cachorro (problem_user/visual_user), campo Last Name digitando no campo errado, erro de ordenação (error_user), preços mudando (visual_user).
+- [x] Evidências adicionadas para: TC01 (login), TC05/TC06 (carrinho), problema #1 (imagens de cachorro), #3/#4 (remove + last name, GIF), #10 (erro de ordenação do error_user), #13 (preços aleatórios do visual_user).
+- [ ] Ainda faltam prints para os problemas #2, #6 (metade dos produtos não adiciona — problem_user e error_user), #7 (lentidão na ordenação do performance_glitch_user), #9 (remove não funciona na home do error_user), #11 (checkout não valida do error_user) e #12 (layout desalinhado do visual_user). Não são obrigatórios, mas reforçam a entrega — se sobrar tempo, vale capturar.
 - [ ] Rodar a automação localmente (`cd automacao && npm install && npx playwright install chromium && npx playwright test`) para confirmar que o script passa, e ajustar se necessário.
 - [ ] Revisar o texto geral e apagar esta seção de checklist antes do envio final.
 - [ ] Se quiser, fazer a parte opcional de API (Restful Booker) — não obrigatória, mas conta como diferencial.
