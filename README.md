@@ -323,14 +323,16 @@ Isso mostra bem o valor de testar contra a documentação oficial em vez de só 
 
 ## 5. Automação
 
-Automatizei o fluxo de **login + adicionar produto ao carrinho** (TC01 + TC05) usando **Playwright com Python (pytest-playwright)**. O script está em `automacao/test_login_carrinho.py` e faz o seguinte:
+Escolhi **Playwright com Python (pytest-playwright)** como ferramenta, por ser a linguagem que eu conheço e me sinto confortável para explicar e defender. Fiz dois scripts, do mais simples ao mais completo:
+
+**`automacao/test_login_carrinho.py`** — automação do fluxo de **login + adicionar produto ao carrinho** (TC01 + TC05):
 1. Abre o SauceDemo
 2. Faz login com `standard_user` / `secret_sauce`
 3. Confirma que foi redirecionado para a página de produtos
 4. Clica em "Add to cart" no primeiro produto
 5. Confirma que o ícone do carrinho passa a exibir "1"
 
-**Resultado real da execução** (rodado localmente):
+Resultado real da execução:
 ```
 platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
 collected 1 item
@@ -338,15 +340,21 @@ test_login_carrinho.py .                                                        
 ======================================= 1 passed in 6.14s =======================================
 ```
 
-Como rodar:
+**`automacao/test_compra_completa.py`** — automação do fluxo completo de compra (TC06 + TC06-B), com uma verificação em cada etapa (login, adicionar ao carrinho, checkout, preenchimento dos dados, conferência de que o total bate com subtotal + taxa, finalização do pedido e geração do PDF). Se qualquer passo não acontecer como esperado, o teste para exatamente ali e reporta o motivo.
+
+Como rodar (qualquer um dos dois scripts):
 ```bash
 cd automacao
 pip install pytest-playwright
 python -m playwright install chromium
 python -m pytest test_login_carrinho.py
+python -m pytest test_compra_completa.py
 ```
 
-Também deixei disponíveis, como material extra (não obrigatório): `login.spec.js` (só login, em JavaScript), `login_carrinho.spec.js` (mesmo fluxo do teste em Python, mas em JavaScript) e `checkout.spec.js` (fluxo completo até a finalização do pedido, em JavaScript — mais avançado, ainda não confirmado rodando).
+Pra ver rodando com o navegador visível e mais devagar (bom pra demonstrar ao vivo):
+```bash
+python -m pytest test_compra_completa.py --headed --slowmo 2000
+```
 
 ---
 
