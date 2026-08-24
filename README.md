@@ -296,7 +296,22 @@ Resumindo: a ideia central é não aceitar “aparentemente foi criado” como r
 
 ## 4. API (opcional)
 
-Não realizado nesta entrega — foco ficou no teste exploratório, casos de teste e automação. [Se quiser, dá pra fazer depois: ver observação no final deste arquivo.]
+**API testada:** [Restful Booker](https://restful-booker.herokuapp.com/) (`https://restful-booker.herokuapp.com`)
+
+**Endpoint escolhido:** `GET /booking` — retorna a lista de todas as reservas cadastradas no sistema.
+
+**Requisição executada:** acessei a URL diretamente pelo navegador (`https://restful-booker.herokuapp.com/booking`).
+
+**Resposta obtida:** um array JSON com milhares de objetos, cada um contendo apenas o campo `bookingid` (ex: `[{"bookingid": 1}, {"bookingid": 2}, ...]`), sem erros — a API respondeu corretamente com a listagem.
+
+**O que eu verificaria para saber se essa API está funcionando corretamente:**
+- **Código de status HTTP**: se a resposta veio com o código esperado (200 OK para uma listagem bem-sucedida).
+- **Formato e estrutura dos dados**: se o retorno é realmente um array JSON válido, e se cada item tem o campo `bookingid` no formato certo (número, não nulo, não duplicado).
+- **Consistência**: se chamar o endpoint de novo, os dados continuam coerentes (não somem IDs aleatoriamente, por exemplo).
+- **Tempo de resposta**: se a API responde em um tempo aceitável, mesmo com uma lista grande de resultados.
+- **Tratamento de erro**: o que acontece se eu pedir um recurso que não existe, ou mandar uma requisição mal formada — se ela responde com um erro claro (ex: 404) em vez de travar ou devolver algo genérico.
+
+**Achado interessante durante o teste:** antes de testar a listagem completa, tentei acessar uma reserva específica (`GET /booking/1`) e a API retornou **"I'm a Teapot"** — que corresponde ao código HTTP 418, um código "de brincadeira" que existe oficialmente no protocolo HTTP. Já o endpoint `GET /ping` (health check da API) respondeu com o código **201 Created**, em vez do mais comum 200 OK — um detalhe que só se percebe testando de verdade, não só supondo o comportamento padrão. Isso mostra bem o valor de testar API na prática: mesmo o endpoint mais simples pode ter um comportamento não convencional (ou, no caso do `/booking/1`, algum tipo de bloqueio/proteção contra tráfego automatizado), e só percebemos isso porque testamos vários endpoints, não só um.
 
 ---
 
@@ -328,4 +343,4 @@ O cenário mais interessante para mim foi o do `visual_user`. O nome do usuário
 - [ ] Ainda faltam prints para os problemas #2, #6 (metade dos produtos não adiciona — problem_user e error_user), #7 (lentidão na ordenação do performance_glitch_user), #9 (remove não funciona na home do error_user), #11 (checkout não valida do error_user) e #12 (layout desalinhado do visual_user). Não são obrigatórios, mas reforçam a entrega — se sobrar tempo, vale capturar.
 - [ ] Rodar a automação localmente (`cd automacao && npm install && npx playwright install chromium && npx playwright test`) para confirmar que o script passa, e ajustar se necessário.
 - [ ] Revisar o texto geral e apagar esta seção de checklist antes do envio final.
-- [ ] Se quiser, fazer a parte opcional de API (Restful Booker) — não obrigatória, mas conta como diferencial.
+- [x] Parte opcional de API (Restful Booker) feita — ver seção 4.
