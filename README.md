@@ -311,7 +311,13 @@ Resumindo: a ideia central é não aceitar “aparentemente foi criado” como r
 - **Tempo de resposta**: se a API responde em um tempo aceitável, mesmo com uma lista grande de resultados.
 - **Tratamento de erro**: o que acontece se eu pedir um recurso que não existe, ou mandar uma requisição mal formada — se ela responde com um erro claro (ex: 404) em vez de travar ou devolver algo genérico.
 
-**Achado interessante durante o teste:** antes de testar a listagem completa, tentei acessar uma reserva específica (`GET /booking/1`) e a API retornou **"I'm a Teapot"** — que corresponde ao código HTTP 418, um código "de brincadeira" que existe oficialmente no protocolo HTTP. Já o endpoint `GET /ping` (health check da API) respondeu com o código **201 Created**, em vez do mais comum 200 OK — um detalhe que só se percebe testando de verdade, não só supondo o comportamento padrão. Isso mostra bem o valor de testar API na prática: mesmo o endpoint mais simples pode ter um comportamento não convencional (ou, no caso do `/booking/1`, algum tipo de bloqueio/proteção contra tráfego automatizado), e só percebemos isso porque testamos vários endpoints, não só um.
+**Comparando com a documentação oficial da API:**
+
+- **`GET /booking`** — a documentação diz que deve retornar um array de objetos `{"bookingid": N}`. Foi exatamente o que recebi. ✅ Comportamento correto.
+- **`GET /ping`** — a documentação confirma que a resposta esperada é `HTTP/1.1 201 Created` (não 200 OK, como seria o padrão em outras APIs). O 201 que recebi bate certinho com o documentado — não é um bug, é assim mesmo por design. Vale destacar porque é um comportamento fora do convencional (a maioria dos health checks usa 200), e só descobri que era intencional comparando com a documentação, não supondo.
+- **`GET /booking/1`** — aqui encontrei uma divergência real: a documentação promete retornar um objeto com os dados da reserva (`firstname`, `lastname`, `totalprice`, `bookingdates`, etc.), mas a resposta que recebi foi **"I'm a Teapot"** (código HTTP 418) em vez dos dados esperados. Isso é uma diferença entre o que a API documenta e o que ela realmente entrega nesse endpoint específico — possivelmente alguma proteção contra tráfego automatizado/bots, já que encontrei relatos públicos de que essa API sofreu abuso de bots no passado.
+
+Isso mostra bem o valor de testar contra a documentação oficial em vez de só supor: o "201 Created" do `/ping` parecia estranho à primeira vista, mas na verdade está correto; já o "418" do `/booking/1` parecia só uma curiosidade, mas na verdade é uma divergência real do que está documentado.
 
 ---
 
