@@ -57,7 +57,6 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 | Resultado esperado | O botão muda para "Remove" e o ícone do carrinho passa a exibir o número "1" |
 | Resultado obtido | O botão mudou para "Remove" e o ícone do carrinho passou a exibir o número "1" |
 | Status | Passou |
-| Evidência | ![Botão "Checkout" e ícone do carrinho na tela do carrinho](evidencias/carrinho_vazio_checkout.png) |
 
 ### TC06 — Checkout completo com dados válidos
 | Campo | Descrição |
@@ -246,10 +245,10 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 - Severidade sugerida: alta — falha silenciosa é pior que uma mensagem de erro clara, porque o usuário não sabe o que fazer para corrigir.
 
 ### 12. Layout desalinhado e imagem trocada (visual_user)
-- Como reproduzir: login com `visual_user` / `secret_sauce`, observar a tela de produtos.
-- Resultado esperado: layout e imagens idênticos ao `standard_user`.
-- Resultado obtido: imagens desalinhadas, e uma das fotos de produto aparece trocada por uma foto de cachorro, misturada entre as imagens corretas dos demais itens.
-- Evidência: [adicionar print comparando com a tela do standard_user]
+- Como reproduzir: login com `visual_user` / `secret_sauce`, observar a tela de produtos e também a tela de carrinho.
+- Resultado esperado: layout e imagens idênticos ao `standard_user`, em todas as telas.
+- Resultado obtido: imagens desalinhadas na tela de produtos, com uma das fotos trocada por uma foto de cachorro; o desalinhamento não fica só ali — na tela de carrinho, a barra lateral azul invade a área de conteúdo e o botão "Checkout" aparece deslocado para a extrema direita, fora do padrão do restante da aplicação.
+- Evidência: ![Tela do carrinho do visual_user com layout desalinhado: barra lateral azul sobrepondo o conteúdo e botão "Checkout" fora do lugar](evidencias/visual_user_layout_carrinho_desalinhado.png)
 - Severidade sugerida: média — não impede a compra, mas prejudica a credibilidade visual da loja.
 
 ### 13. Preços incorretos e aleatórios ao ordenar (visual_user)
