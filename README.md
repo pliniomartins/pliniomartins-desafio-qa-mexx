@@ -13,155 +13,127 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 ## 1. Casos de teste
 
 ### TC01 — Login com credenciais válidas
-| Campo | Descrição |
-|---|---|
-| Cenário | Login com usuário e senha válidos (`standard_user`) |
-| Passos | 1. Acessar saucedemo.com. 2. Preencher usuário `standard_user`. 3. Preencher senha `secret_sauce`. 4. Clicar em "Login". |
-| Resultado esperado | Usuário é redirecionado para a página de produtos (`inventory.html`) |
-| Resultado obtido | Usuário foi redirecionado corretamente para `https://www.saucedemo.com/inventory.html`, a página de produtos |
-| Status | Passou |
+- Cenário: login com usuário e senha válidos (`standard_user`).
+- Passos: 1. Acessar saucedemo.com. 2. Preencher usuário `standard_user`. 3. Preencher senha `secret_sauce`. 4. Clicar em "Login".
+- Resultado esperado: usuário é redirecionado para a página de produtos (`inventory.html`).
+- Resultado obtido: usuário foi redirecionado corretamente para `https://www.saucedemo.com/inventory.html`, a página de produtos.
+- Status: Passou.
 
 ### TC02 — Login com senha inválida
-| Campo | Descrição |
-|---|---|
-| Cenário | Login com usuário válido e senha incorreta |
-| Passos | 1. Acessar saucedemo.com. 2. Preencher usuário `standard_user`. 3. Preencher senha `senha_errada`. 4. Clicar em "Login". |
-| Resultado esperado | Sistema não realiza login e exibe mensagem de erro informando que usuário e senha não conferem, sem expor qual dos dois campos está incorreto (boa prática de segurança) |
-| Resultado obtido | Sistema exibiu a mensagem "Epic sadface: Username and password do not match any user in this service", sem indicar qual dos dois campos estava errado |
-| Status | Passou |
+- Cenário: login com usuário válido e senha incorreta.
+- Passos: 1. Acessar saucedemo.com. 2. Preencher usuário `standard_user`. 3. Preencher senha `senha_errada`. 4. Clicar em "Login".
+- Resultado esperado: sistema não realiza login e exibe mensagem de erro informando que usuário e senha não conferem, sem expor qual dos dois campos está incorreto (boa prática de segurança).
+- Resultado obtido: sistema exibiu a mensagem "Epic sadface: Username and password do not match any user in this service", sem indicar qual dos dois campos estava errado.
+- Status: Passou.
 
 ### TC03 — Login com campos em branco
-| Campo | Descrição |
-|---|---|
-| Cenário | Tentar login sem preencher usuário nem senha |
-| Passos | 1. Acessar saucedemo.com. 2. Deixar usuário e senha em branco. 3. Clicar em "Login". |
-| Resultado esperado | Sistema bloqueia o envio e exibe mensagem "Username is required" |
-| Resultado obtido | Sistema exibiu a mensagem "Epic sadface: Username is required" |
-| Status | Passou |
+- Cenário: tentar login sem preencher usuário nem senha.
+- Passos: 1. Acessar saucedemo.com. 2. Deixar usuário e senha em branco. 3. Clicar em "Login".
+- Resultado esperado: sistema bloqueia o envio e exibe mensagem "Username is required".
+- Resultado obtido: sistema exibiu a mensagem "Epic sadface: Username is required".
+- Status: Passou.
 
 ### TC04 — Login com usuário bloqueado (locked_out_user)
-| Campo | Descrição |
-|---|---|
-| Cenário | Login com um usuário que deveria estar bloqueado pelo sistema |
-| Passos | 1. Acessar saucedemo.com. 2. Preencher usuário `locked_out_user`. 3. Preencher senha `secret_sauce`. 4. Clicar em "Login". |
-| Resultado esperado | Sistema impede o acesso e exibe mensagem clara informando que o usuário foi bloqueado |
-| Resultado obtido | Sistema impediu o login e exibiu a mensagem "Epic sadface: Sorry, this user has been locked out." |
-| Status | Passou |
+- Cenário: login com um usuário que deveria estar bloqueado pelo sistema.
+- Passos: 1. Acessar saucedemo.com. 2. Preencher usuário `locked_out_user`. 3. Preencher senha `secret_sauce`. 4. Clicar em "Login".
+- Resultado esperado: sistema impede o acesso e exibe mensagem clara informando que o usuário foi bloqueado.
+- Resultado obtido: sistema impediu o login e exibiu a mensagem "Epic sadface: Sorry, this user has been locked out.".
+- Status: Passou.
 
 ### TC05 — Adicionar produto ao carrinho
-| Campo | Descrição |
-|---|---|
-| Cenário | Adicionar um produto ao carrinho e verificar o contador |
-| Passos | 1. Login com `standard_user`. 2. Clicar em "Add to cart" no primeiro produto listado. 3. Observar o ícone do carrinho. |
-| Resultado esperado | O botão muda para "Remove" e o ícone do carrinho passa a exibir o número "1" |
-| Resultado obtido | O botão mudou para "Remove" e o ícone do carrinho passou a exibir o número "1" |
-| Status | Passou |
+- Cenário: adicionar um produto ao carrinho e verificar o contador.
+- Passos: 1. Login com `standard_user`. 2. Clicar em "Add to cart" no primeiro produto listado. 3. Observar o ícone do carrinho.
+- Resultado esperado: o botão muda para "Remove" e o ícone do carrinho passa a exibir o número "1".
+- Resultado obtido: o botão mudou para "Remove" e o ícone do carrinho passou a exibir o número "1".
+- Status: Passou.
 
 ### TC06 — Checkout completo com dados válidos
-| Campo | Descrição |
-|---|---|
-| Cenário | Fluxo completo de compra, do login até a confirmação do pedido |
-| Passos | 1. Login com `standard_user`. 2. Adicionar 1 produto ao carrinho. 3. Ir ao carrinho e clicar em "Checkout". 4. Preencher nome, sobrenome e CEP válidos. 5. Clicar em "Continue". 6. Conferir resumo do pedido. 7. Clicar em "Finish". |
-| Resultado esperado | Pedido é concluído e a página exibe a mensagem "Thank you for your order!" com o ícone de confirmação |
-| Resultado obtido | Pedido concluído com sucesso, exibindo "Thank you for your order!" com as opções "Back Home" e "Generate PDF Order" |
-| Status | Passou |
-
-**Observação:** a tela final tem um botão "Generate PDF Order" que não estava documentado no roteiro original — testado separadamente abaixo (TC06-B).
+- Cenário: fluxo completo de compra, do login até a confirmação do pedido.
+- Passos: 1. Login com `standard_user`. 2. Adicionar 1 produto ao carrinho. 3. Ir ao carrinho e clicar em "Checkout". 4. Preencher nome, sobrenome e CEP válidos. 5. Clicar em "Continue". 6. Conferir resumo do pedido. 7. Clicar em "Finish".
+- Resultado esperado: pedido é concluído e a página exibe a mensagem "Thank you for your order!" com o ícone de confirmação.
+- Resultado obtido: pedido concluído com sucesso, exibindo "Thank you for your order!" com as opções "Back Home" e "Generate PDF Order".
+- Status: Passou.
+- Observação: a tela final tem um botão "Generate PDF Order" que não estava documentado no roteiro original — testado separadamente abaixo (TC06-B).
 
 ### TC06-B — Geração de PDF do pedido (caso de teste adicional, descoberto durante a exploração)
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se o PDF gerado na tela de confirmação reflete corretamente o pedido feito |
-| Passos | 1. Concluir uma compra (TC06). 2. Na tela "Thank you for your order!", clicar em "Generate PDF Order". 3. Abrir o PDF baixado. 4. Conferir se o(s) produto(s) e o valor no PDF batem com o que foi comprado. |
-| Resultado esperado | PDF é baixado e exibe corretamente o produto e o valor da compra realizada |
-| Resultado obtido | PDF foi baixado, abriu normalmente, e o valor exibido corresponde ao valor do produto adicionado/comprado |
-| Status | Passou |
+- Cenário: verificar se o PDF gerado na tela de confirmação reflete corretamente o pedido feito.
+- Passos: 1. Concluir uma compra (TC06). 2. Na tela "Thank you for your order!", clicar em "Generate PDF Order". 3. Abrir o PDF baixado. 4. Conferir se o(s) produto(s) e o valor no PDF batem com o que foi comprado.
+- Resultado esperado: PDF é baixado e exibe corretamente o produto e o valor da compra realizada.
+- Resultado obtido: PDF foi baixado, abriu normalmente, e o valor exibido corresponde ao valor do produto adicionado/comprado.
+- Status: Passou.
 
 ### TC07 — Checkout com campo obrigatório vazio
-| Campo | Descrição |
-|---|---|
-| Cenário | Tentar avançar no checkout sem preencher o sobrenome |
-| Passos | 1. Login com `standard_user`. 2. Adicionar 1 produto ao carrinho. 3. Ir ao checkout. 4. Preencher apenas nome e CEP, deixando sobrenome vazio. 5. Clicar em "Continue". |
-| Resultado esperado | Sistema não avança e exibe mensagem "Error: Last Name is required" |
-| Resultado obtido | Sistema não avançou e exibiu a mensagem "Error: Last Name is required" (confirmado: só avança se todos os campos forem preenchidos) |
-| Status | Passou |
+- Cenário: tentar avançar no checkout sem preencher o sobrenome.
+- Passos: 1. Login com `standard_user`. 2. Adicionar 1 produto ao carrinho. 3. Ir ao checkout. 4. Preencher apenas nome e CEP, deixando sobrenome vazio. 5. Clicar em "Continue".
+- Resultado esperado: sistema não avança e exibe mensagem "Error: Last Name is required".
+- Resultado obtido: sistema não avançou e exibiu a mensagem "Error: Last Name is required" (confirmado: só avança se todos os campos forem preenchidos).
+- Status: Passou.
 
 ### TC08 — Comportamento visual do usuário problem_user
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se as imagens dos produtos são exibidas corretamente para o usuário `problem_user` |
-| Passos | 1. Login com `problem_user` / `secret_sauce`. 2. Observar as imagens de todos os produtos na página de inventário. |
-| Resultado esperado | Cada produto exibe sua própria imagem, todas diferentes entre si |
-| Resultado obtido | Todos os produtos exibem a mesma imagem (um cachorro segurando uma bola na boca), em vez da imagem real de cada item |
-| Status | Falhou |
+- Cenário: verificar se as imagens dos produtos são exibidas corretamente para o usuário `problem_user`.
+- Passos: 1. Login com `problem_user` / `secret_sauce`. 2. Observar as imagens de todos os produtos na página de inventário.
+- Resultado esperado: cada produto exibe sua própria imagem, todas diferentes entre si.
+- Resultado obtido: todos os produtos exibem a mesma imagem (um cachorro segurando uma bola na boca), em vez da imagem real de cada item.
+- Status: Falhou.
 
 ### TC08-B — Adicionar ao carrinho todos os produtos (problem_user)
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se todos os produtos podem ser adicionados ao carrinho normalmente |
-| Passos | 1. Login com `problem_user`. 2. Tentar clicar em "Add to cart" em cada um dos 6 produtos da lista. |
-| Resultado esperado | Todos os 6 produtos podem ser adicionados ao carrinho normalmente |
-| Resultado obtido | Apenas 3 dos 6 produtos puderam ser adicionados (Sauce Labs Backpack, Sauce Labs Bike Light e Sauce Labs Onesie). Os outros 3 produtos não respondem ao clique em "Add to cart" |
-| Status | Falhou |
+- Cenário: verificar se todos os produtos podem ser adicionados ao carrinho normalmente.
+- Passos: 1. Login com `problem_user`. 2. Tentar clicar em "Add to cart" em cada um dos 6 produtos da lista.
+- Resultado esperado: todos os 6 produtos podem ser adicionados ao carrinho normalmente.
+- Resultado obtido: apenas 3 dos 6 produtos puderam ser adicionados (Sauce Labs Backpack, Sauce Labs Bike Light e Sauce Labs Onesie). Os outros 3 produtos não respondem ao clique em "Add to cart".
+- Status: Falhou.
 
 ### TC08-C — Remover produto direto na tela de inventário (problem_user)
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se o botão "Remove" funciona na própria tela de produtos (inventory), sem precisar entrar no carrinho |
-| Passos | 1. Login com `problem_user`. 2. Adicionar um dos produtos que funciona (ex: Sauce Labs Backpack). 3. Clicar no botão "Remove" que aparece no lugar do "Add to cart", ainda na tela de inventário. |
-| Resultado esperado | O item é removido do carrinho e o botão volta a exibir "Add to cart" |
-| Resultado obtido | O botão "Remove" na tela de inventário não funciona — o item só pôde ser removido entrando na tela do carrinho e clicando em "Remove" por lá |
-| Status | Falhou |
+- Cenário: verificar se o botão "Remove" funciona na própria tela de produtos (inventory), sem precisar entrar no carrinho.
+- Passos: 1. Login com `problem_user`. 2. Adicionar um dos produtos que funciona (ex: Sauce Labs Backpack). 3. Clicar no botão "Remove" que aparece no lugar do "Add to cart", ainda na tela de inventário.
+- Resultado esperado: o item é removido do carrinho e o botão volta a exibir "Add to cart".
+- Resultado obtido: o botão "Remove" na tela de inventário não funciona — o item só pôde ser removido entrando na tela do carrinho e clicando em "Remove" por lá.
+- Status: Falhou.
 
 ### TC08-D — Campo "Last Name" no checkout (problem_user)
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se é possível digitar corretamente no campo "Last Name" da tela de checkout |
-| Passos | 1. Login com `problem_user`. 2. Adicionar um produto válido ao carrinho e ir até o checkout. 3. Clicar no campo "Last Name" e tentar digitar um sobrenome. |
-| Resultado esperado | O texto digitado aparece corretamente no campo "Last Name" |
-| Resultado obtido | Ao digitar no campo "Last Name", o texto é inserido no campo "First Name" (o foco/digitação "sobe" para o campo errado) |
-| Status | Falhou |
+- Cenário: verificar se é possível digitar corretamente no campo "Last Name" da tela de checkout.
+- Passos: 1. Login com `problem_user`. 2. Adicionar um produto válido ao carrinho e ir até o checkout. 3. Clicar no campo "Last Name" e tentar digitar um sobrenome.
+- Resultado esperado: o texto digitado aparece corretamente no campo "Last Name".
+- Resultado obtido: ao digitar no campo "Last Name", o texto é inserido no campo "First Name" (o foco/digitação "sobe" para o campo errado).
+- Status: Falhou.
 
 ### TC09 — Ordenação de preços (Price: low to high)
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se a ordenação por preço funciona corretamente com `problem_user` |
-| Passos | 1. Login com `problem_user`. 2. No dropdown de ordenação, selecionar "Price (low to high)". 3. Conferir a ordem dos preços exibidos. |
-| Resultado esperado | Produtos ficam ordenados do menor para o maior preço |
-| Resultado obtido | A lista de produtos não muda de ordem ao selecionar "Price (low to high)" nem "Price (high to low)" — os preços continuam na mesma ordem de antes, como se a ordenação não tivesse sido aplicada |
-| Status | Falhou |
+- Cenário: verificar se a ordenação por preço funciona corretamente com `problem_user`.
+- Passos: 1. Login com `problem_user`. 2. No dropdown de ordenação, selecionar "Price (low to high)". 3. Conferir a ordem dos preços exibidos.
+- Resultado esperado: produtos ficam ordenados do menor para o maior preço.
+- Resultado obtido: a lista de produtos não muda de ordem ao selecionar "Price (low to high)" nem "Price (high to low)" — os preços continuam na mesma ordem de antes, como se a ordenação não tivesse sido aplicada.
+- Status: Falhou.
 
 ### TC10 — Tempo de resposta com performance_glitch_user
-| Campo | Descrição |
-|---|---|
-| Cenário | Medir o tempo de carregamento após login com um usuário conhecido por lentidão |
-| Passos | 1. Acessar saucedemo.com. 2. Login com `performance_glitch_user` / `secret_sauce`. 3. Cronometrar o tempo entre o clique em "Login" e o carregamento completo da página de produtos. |
-| Resultado esperado | Carregamento em tempo similar ao `standard_user` (poucos segundos) |
-| Resultado obtido | Login com `standard_user` levou ~0,44s; login com `performance_glitch_user` levou ~7,1s até a tela de produtos carregar — um atraso muito perceptível |
-| Status | Falhou |
-| Evidência | ![Gravação do login do performance_glitch_user, mostrando a demora entre o clique em Login e o carregamento da página de produtos](evidencias/performance_glitch_user_login_lento.gif) |
-
-**Observação:** tirando a lentidão do login, o resto do fluxo com `performance_glitch_user` funcionou normalmente: todos os produtos podem ser adicionados/removidos na própria tela de inventário, a ordenação por preço (low to high / high to low) funciona corretamente — só que com um retardo perceptível para aplicar a mudança — e a remoção de itens pelo carrinho funciona normalmente, com o contador atualizando certinho.
+- Cenário: medir o tempo de carregamento após login com um usuário conhecido por lentidão.
+- Passos: 1. Acessar saucedemo.com. 2. Login com `performance_glitch_user` / `secret_sauce`. 3. Cronometrar o tempo entre o clique em "Login" e o carregamento completo da página de produtos.
+- Resultado esperado: carregamento em tempo similar ao `standard_user` (poucos segundos).
+- Resultado obtido: login com `standard_user` levou ~0,44s; login com `performance_glitch_user` levou ~7,1s até a tela de produtos carregar — um atraso muito perceptível.
+- Status: Falhou.
+- Evidência: ![Gravação do login do performance_glitch_user, mostrando a demora entre o clique em Login e o carregamento da página de produtos](evidencias/performance_glitch_user_login_lento.gif)
+- Observação: tirando a lentidão do login, o resto do fluxo com `performance_glitch_user` funcionou normalmente: todos os produtos podem ser adicionados/removidos na própria tela de inventário, a ordenação por preço (low to high / high to low) funciona corretamente — só que com um retardo perceptível para aplicar a mudança — e a remoção de itens pelo carrinho funciona normalmente, com o contador atualizando certinho.
 
 ### TC11 — Remoção de item do carrinho com error_user
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se é possível remover um item do carrinho com o usuário `error_user` |
-| Passos | 1. Login com `error_user`. 2. Adicionar 2 produtos ao carrinho. 3. Ir ao carrinho. 4. Clicar em "Remove" em um dos itens. |
-| Resultado esperado | O item é removido da lista e o contador do carrinho é atualizado |
-| Resultado obtido | Dentro da tela do carrinho, o botão "Remove" funciona normalmente — o item some da lista e o contador atualiza corretamente |
-| Status | Passou |
-
-**Observação:** `error_user` se mostrou parecido com `problem_user` em vários pontos, mas com diferenças importantes: apenas 3 dos 6 produtos podem ser adicionados ao carrinho, os itens NÃO podem ser removidos direto na tela de inventário (home) — só pelo carrinho, que funciona normalmente —, a ordenação por preço chega a gerar um erro (diferente do `problem_user`, que só ignora a ordenação), o campo "Last Name" no checkout não funciona, e a compra não é finalizada sem exibir nenhuma mensagem de erro explicando o motivo. Ver problemas 8 a 11 abaixo.
+- Cenário: verificar se é possível remover um item do carrinho com o usuário `error_user`.
+- Passos: 1. Login com `error_user`. 2. Adicionar 2 produtos ao carrinho. 3. Ir ao carrinho. 4. Clicar em "Remove" em um dos itens.
+- Resultado esperado: o item é removido da lista e o contador do carrinho é atualizado.
+- Resultado obtido: dentro da tela do carrinho, o botão "Remove" funciona normalmente — o item some da lista e o contador atualiza corretamente.
+- Status: Passou.
+- Observação: `error_user` se mostrou parecido com `problem_user` em vários pontos, mas com diferenças importantes: apenas 3 dos 6 produtos podem ser adicionados ao carrinho, os itens NÃO podem ser removidos direto na tela de inventário (home) — só pelo carrinho, que funciona normalmente —, a ordenação por preço chega a gerar um erro (diferente do `problem_user`, que só ignora a ordenação), o campo "Last Name" no checkout não funciona, e a compra não é finalizada sem exibir nenhuma mensagem de erro explicando o motivo. Ver problemas 8 a 11 mais abaixo.
 
 ### TC12 — Inspeção visual e de dados (visual_user)
-| Campo | Descrição |
-|---|---|
-| Cenário | Comparar a tela de produtos e o comportamento da ordenação por preço com o `standard_user` |
-| Passos | 1. Login com `visual_user` / `secret_sauce`. 2. Observar imagens e preços dos produtos na tela de inventário. 3. Usar o dropdown de ordenação para selecionar "Price (low to high)" e depois "Price (high to low)", observando o que muda. |
-| Resultado esperado | Layout e imagens iguais ao `standard_user`; preços corretos e fixos; ordenação reflete os preços reais |
-| Resultado obtido | Imagens desalinhadas e uma delas trocada por uma foto de cachorro (misturada entre as fotos corretas dos outros itens); preços exibidos incorretos; ao clicar para ordenar por preço, os valores mudam para números aparentemente aleatórios a cada clique — a imagem do cachorro, por exemplo, permanece fixa na primeira posição, mas o preço ao lado dela muda toda vez que a ordenação é acionada |
-| Status | Falhou |
+- Cenário: comparar a tela de produtos e o comportamento da ordenação por preço com o `standard_user`.
+- Passos: 1. Login com `visual_user` / `secret_sauce`. 2. Observar imagens e preços dos produtos na tela de inventário. 3. Usar o dropdown de ordenação para selecionar "Price (low to high)" e depois "Price (high to low)", observando o que muda.
+- Resultado esperado: layout e imagens iguais ao `standard_user`; preços corretos e fixos; ordenação reflete os preços reais.
+- Resultado obtido: imagens desalinhadas e uma delas trocada por uma foto de cachorro (misturada entre as fotos corretas dos outros itens); preços exibidos incorretos; ao clicar para ordenar por preço, os valores mudam para números aparentemente aleatórios a cada clique — a imagem do cachorro, por exemplo, permanece fixa na primeira posição, mas o preço ao lado dela muda toda vez que a ordenação é acionada.
+- Status: Falhou.
+
+### TC13 — Proteção de rota após logout (botão voltar do navegador)
+- Cenário: verificar se a aplicação protege a página de produtos contra acesso via cache do navegador após logout.
+- Passos: 1. Fazer login com qualquer usuário. 2. Fazer logout. 3. Clicar no botão "Voltar" do navegador.
+- Resultado esperado: o sistema não permite visualizar a página autenticada; redireciona para o login ou bloqueia o acesso.
+- Resultado obtido: o sistema exibiu a mensagem "Epic sadface: You can only access '/inventory.html' when you are logged in.", bloqueando corretamente o acesso.
+- Status: Passou.
 
 ---
 
@@ -257,15 +229,6 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 - Resultado obtido: os preços já aparecem incorretos antes de qualquer ordenação, e a cada clique no seletor de ordenação os valores exibidos mudam para números aparentemente aleatórios — inclusive para produtos que não mudam de posição na lista (ex: o item com a foto de cachorro permanece fixo na primeira posição, mas seu preço muda a cada clique).
 - Evidência: ![Preços aleatórios após ordenar por preço (visual_user) — Backpack aparece a $53.65, Bike Light a $89.51, valores fora do padrão real da loja](evidencias/visual_user_precos_aleatorios.png)
 - Severidade sugerida: alta — exibir preço errado/instável para o cliente é um problema sério em um e-commerce real (risco de cobrança incorreta e perda de confiança).
-
-### TC13 — Proteção de rota após logout (botão voltar do navegador)
-| Campo | Descrição |
-|---|---|
-| Cenário | Verificar se a aplicação protege a página de produtos contra acesso via cache do navegador após logout |
-| Passos | 1. Fazer login com qualquer usuário. 2. Fazer logout. 3. Clicar no botão "Voltar" do navegador. |
-| Resultado esperado | O sistema não permite visualizar a página autenticada; redireciona para o login ou bloqueia o acesso |
-| Resultado obtido | O sistema exibiu a mensagem "Epic sadface: You can only access '/inventory.html' when you are logged in.", bloqueando corretamente o acesso |
-| Status | Passou |
 
 ---
 
