@@ -20,7 +20,6 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 | Resultado esperado | Usuário é redirecionado para a página de produtos (`inventory.html`) |
 | Resultado obtido | Usuário foi redirecionado corretamente para `https://www.saucedemo.com/inventory.html`, a página de produtos |
 | Status | Passou |
-| Evidência | ![Tela de login do SauceDemo](evidencias/01_tela_login_padrao.gif) |
 
 ### TC02 — Login com senha inválida
 | Campo | Descrição |
@@ -140,6 +139,7 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 | Resultado esperado | Carregamento em tempo similar ao `standard_user` (poucos segundos) |
 | Resultado obtido | Login com `standard_user` levou ~0,44s; login com `performance_glitch_user` levou ~7,1s até a tela de produtos carregar — um atraso muito perceptível |
 | Status | Falhou |
+| Evidência | ![Gravação do login do performance_glitch_user, mostrando a demora entre o clique em Login e o carregamento da página de produtos](evidencias/performance_glitch_user_login_lento.gif) |
 
 **Observação:** tirando a lentidão do login, o resto do fluxo com `performance_glitch_user` funcionou normalmente: todos os produtos podem ser adicionados/removidos na própria tela de inventário, a ordenação por preço (low to high / high to low) funciona corretamente — só que com um retardo perceptível para aplicar a mudança — e a remoção de itens pelo carrinho funciona normalmente, com o contador atualizando certinho.
 
@@ -206,7 +206,7 @@ Este material foi montado com apoio de IA (Claude), que ajudou a estruturar os c
 - Como reproduzir: fazer login com `performance_glitch_user` / `secret_sauce` e cronometrar o tempo até a tela de produtos carregar.
 - Resultado esperado: tempo de carregamento similar ao `standard_user` (menos de 1 segundo).
 - Resultado obtido: `standard_user` levou ~0,44s; `performance_glitch_user` levou ~7,1s — quase 16x mais lento.
-- Evidência: cronometragem manual (adicionar gravação de tela, se possível, para reforçar)
+- Evidência: ![Gravação do login do performance_glitch_user, mostrando a demora entre o clique em Login e o carregamento da página de produtos](evidencias/performance_glitch_user_login_lento.gif)
 - Severidade sugerida: média/alta — dependendo do contexto de negócio, uma demora de 7s no login pode levar o usuário a desistir ou pensar que o site travou.
 
 ### 7. Lentidão ao aplicar ordenação por preço (performance_glitch_user)
