@@ -6,7 +6,7 @@ Data: 24/08/2026
 
  Nota sobre metodologia
 
- Todos os testes exploratórios foram executados ao vivo por mim, no navegador, seguindo um roteiro guiado — cada "Resultado obtido" reflete o que eu de fato observei na aplicação, incluindo dois achados que não estavam previstos no roteiro original (o botão "Generate PDF Order" e o comportamento de preços aleatórios do `visual_user`).
+ Todos os testes exploratórios foram executados por mim, no navegador, seguindo um roteiro guiado — cada "Resultado obtido" reflete o que eu de fato observei na aplicação, incluindo dois achados que não estavam previstos no roteiro original (o botão "Generate PDF Order" e o comportamento de preços aleatórios do `visual_user`).
 
 
 
