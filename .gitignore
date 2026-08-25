@@ -9,6 +9,7 @@ playwright-report/
 # da entrega em si, só do processo de gerar o .docx
 build_docx.js
 *.docx
+Desafio_Tecnico_QA_SauceDemo_Plinio.txt
 evidencias/frames/
 evidencias/frames2/
 evidencias/problem_user_cart_remove_frame.png
